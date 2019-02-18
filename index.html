@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+    <head>
+            <meta http-equiv="Content-Security-Policy" content="default-src gap://ready file://* *; img-src * data:; style-src 'self' http://* https://* 'unsafe-inline'; script-src 'self' http://* https://* 'unsafe-inline' 'unsafe-eval'"> 
+           <meta name="format-detection" content="telephone=no">
+            <meta charset="utf-8">
+            <meta name="msapplication-tap-highlight" content="no">
+         <!--   <meta name="viewport" content="viewport-fit=cover, user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">  -->
+            <meta name = "viewport" content="width=device-width, user-scalable = no" />
+            <!-- 
+            <link rel="stylesheet" href="css/jquery.mobile-1.5.0-alpha.1.min.css" />  
+            <script src="js/jquery-3.3.1.min.js"></script>
+            <script src="js/jquery.mobile-1.5.0-alpha.1.min.js"></script>  -->
+            <link rel="stylesheet" href="css/index.css" />
+            
+            <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
+            <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+            <script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+            <link rel="stylesheet" href="css/mybooksite.css" />
+           <!-- <link rel="stylesheet" href="css/test.css" />  -->
+           <link rel="stylesheet" href="css/BlandOr.css" />
+            
+        <!--    <script type="text/javascript" src="js/bookDetail.js"></script> -->
+            <script type="text/javascript" charset="utf-8" src="cordova.js"></script>
+            <script type="text/javascript" src="js/urlConfig.js"></script>
+        <script type="text/javascript" src="js/index.js"></script>
+
+        <title>Login</title>
+    </head>
+    <body>
+
+        <div data-role="page" class= "noscroll" data-transition="none">
+                    
+            <div data-role="header" data-position="fixed">
+                <h1 style="color:white;text-shadow: none;">Login</h1>
+            </div><!-- /header -->
+                    
+            <div data-role="content" >	
+                    <div class="loader"></div>
+                    <div>
+                    <form>
+                        <input type="email" data-clear-btn="false" name="email" id="email" placeholder="Email" required><br>
+                        <input type="password" data-clear-btn="false" name="password" id="password" placeholder="Password" autocomplete="off" required><br>                    
+                        <input type="button" id="loginbutton" value="Login">
+                    </form>
+                    </div>
+                    <div>
+                    <form>
+                        <input type="hidden" data-clear-btn="false" name="randomcode" id="randomcode" placeholder="Enter Verification Code"><br>
+                        <input type="hidden" id="verificationbutton" value="Click to confirm code">
+                    </form>
+                    </div>
+                    <div class="wrapper">
+                            <div class="right">
+                                    <label id="forgotUsername">Forgot Username&nbsp&nbsp&nbsp  </label> 
+                                      
+                                </div>
+                            <div class="right">
+                                    <label id="forgotPassword">Forgot Password </label>   
+                                </div>
+                            
+                    </div>
+
+                        <p>Don't have an account? Register now!</p>
+                        <input type="button" id="registerbutton" value="Register">
+                        <!-- Below buttom functionality is working and is now commente das it was used initially for testing
+                        <input type="button" id="testPush" value="Push Notification">
+                            -->
+
+                    
+            </div><!-- /content -->
+            <!--
+            <div data-role="footer" data-position = "fixed">
+                    <h1>Search</h1>
+                </div>  --><!-- footer -->
+                    
+            `</div><!-- /page -->
+                    
+    
+    </body>
+</html>

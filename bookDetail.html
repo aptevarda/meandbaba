@@ -1,0 +1,107 @@
+ <!DOCTYPE html>
+<html>
+    <head>
+           
+          <meta http-equiv="Content-Security-Policy" content="default-src gap://ready file://* *; img-src * data:; style-src 'self' http://* https://* 'unsafe-inline'; script-src 'self' http://* https://* 'unsafe-inline' 'unsafe-eval'"> 
+           <meta name="format-detection" content="telephone=no">
+            <meta charset="utf-8">
+            <meta name="msapplication-tap-highlight" content="no">
+            <!-- <meta name="viewport" content="viewport-fit=cover, user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">  -->
+            
+            <meta name = "viewport" content="width=device-width, user-scalable = no" />
+            <!-- 
+            <link rel="stylesheet" href="css/jquery.mobile-1.5.0-alpha.1.min.css" />  
+            <script src="js/jquery-3.3.1.min.js"></script>
+            <script src="js/jquery.mobile-1.5.0-alpha.1.min.js"></script>  -->
+            
+            <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
+            <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+            <script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+             
+            <link rel="stylesheet" href="css/mybooksite.css" />
+            <!-- <link rel="stylesheet" href="css/test.css" />  -->
+            <link rel="stylesheet" href="css/BlandOr.css" />
+            <link rel="stylesheet" href="css/mybooksite.css" />
+            <script type="text/javascript" src="js/urlConfig.js"></script>
+            <script type="text/javascript" src="js/bookDetail.js"></script>
+            <script type="text/javascript" charset="utf-8" src="cordova.js"></script>  
+
+        <title>Login</title>
+    </head>
+    <body>
+
+            <div id = "page1" class="noscroll" data-role = "page" data-add-back-btn = "true">
+                    <div data-role="header" data-position="fixed">
+                            <button onclick="goback()" id="getmeback" style="color:white;text-shadow: none;" data-icon="carat-l">Back</button>
+                            
+                            <h1 style="color:white;text-shadow: none;">Book Details</h1>
+                            
+                            
+                    </div>
+                    
+            <div data-role="content">
+                        <div class="loader"></div>
+                        <!-- <h3 style="color:white;text-shadow: none;"> Book Details: </h3>  -->
+                        <fieldset class="ui-grid-a">
+                                <div class="ui-block-a"><label style="color:white;text-shadow: none;">Bookname </label>  </div>
+                                <div class="ui-block-b"><label id="bookName" style="color:white;text-shadow: none;">Bookname</label> </div>
+                        </fieldset> 
+                        <!--
+                        <div class="wrapper">
+                                <div class="content">
+                                        <label>Book Name:</label>  
+                                    </div>
+                                <div class="right" id="bookName" >Bookname    *</div>
+                        </div>
+                        -->
+                        <fieldset class="ui-grid-a">
+                                <div class="ui-block-a"><label style="color:white;text-shadow: none;">Price($): </label>  </div>
+                                <div class="ui-block-b"><label id="price" style="color:white;text-shadow: none;">**Price**</label> </div>
+                             </fieldset> 
+                        <!--
+                        <div class="wrapper">
+                                <div class="content">
+                                        <label>Price($):</label>   
+                                    </div>
+                                <div class="right" id="price" >**price**</div>
+                        </div>
+                        -->
+                        <fieldset class="ui-grid-a">
+                                <div class="ui-block-a"><label style="color:white;text-shadow: none;">University </label>  </div>
+                                <div class="ui-block-b"><label id="university" style="color:white;text-shadow: none;">**Uni**</label> </div>
+                        </fieldset> 
+                        <!--
+                        <div class="wrapper">
+                                <div class="content">
+                                        <label>University:</label>   
+                                    </div>
+                                <div class="right" id="university" >**Uni**</div>
+                        </div>
+                        -->
+                        <fieldset class="ui-grid-a">
+                                <div class="ui-block-a"><label style="color:white;text-shadow: none;">Comments </label>  </div>
+                                <div class="ui-block-b"><label id="user_comments" style="color:white;text-shadow: none;">**User Comments**</label> </div>
+                        </fieldset> 
+                        <!--
+                        <div class="wrapper">
+                                <div class="content">
+                                <label>Comments:</label>   
+                                </div>
+                                <div class="right" id="user_comments" >**User Comments**</div>
+                        -->        
+
+                       <h3 style="color:white;text-shadow: none;"> Book images: </h3>
+                        <div>
+                                <img  class="optional" id="smallImage" src="img/logo.png" width="300" height="300"/> 
+                                <img  class="optional2" id="smallImage2" src="img/logo.png" width="150" height="150"/> 
+                                <img  class="optional3" id="smallImage3" src="img/logo.png" width="150" height="150"/> 
+                        </div>	
+                         
+            </div>
+                    
+            </div>
+                    
+    
+    </body>
+</html>
+

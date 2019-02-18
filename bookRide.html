@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html>
+    <head>
+           
+          <meta http-equiv="Content-Security-Policy" content="default-src gap://ready file://* *; img-src * data:; style-src 'self' http://* https://* 'unsafe-inline'; script-src 'self' http://* https://* 'unsafe-inline' 'unsafe-eval'"> 
+           <meta name="format-detection" content="telephone=no">
+           <meta name="mobile-web-app-capable" content="yes">
+            <meta charset="utf-8">
+            <meta name="msapplication-tap-highlight" content="no">
+            <!-- <meta name="viewport" content="viewport-fit=cover, user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">  -->
+            
+            <meta name = "viewport" content="width=device-width, user-scalable = no" />
+            <!-- 
+            <link rel="stylesheet" href="css/jquery.mobile-1.5.0-alpha.1.min.css" />  
+            <script src="js/jquery-3.3.1.min.js"></script>
+            <script src="js/jquery.mobile-1.5.0-alpha.1.min.js"></script>  -->
+            <link rel="stylesheet" href="css/index.css" />
+            <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
+            <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+            <script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+             
+            <link rel="stylesheet" href="css/mybooksite.css" />
+            <!-- <link rel="stylesheet" href="css/test.css" />  -->
+            <link rel="stylesheet" href="css/BlandOr.css" />
+            
+            <script type="text/javascript" src="js/urlConfig.js"></script>
+            <script type="text/javascript" src="js/moment.js"></script>
+            <script type="text/javascript" src="js/moment-timezone-with-data.js"></script>
+            <script type="text/javascript" src="js/bookRide.js"></script>
+            
+            <script type="text/javascript" charset="utf-8" src="cordova.js"></script>  
+
+        <title>Login</title>
+    </head>
+    <body>
+
+            <div data-role="page" class= "noscroll" data-transition="none">
+                    <div data-role="header" data-position="fixed"   >
+                            <button onclick="goback()" id="getmeback"  style="color:white;text-shadow: none;" data-icon="carat-l">Back</button>
+                            
+                            <h1 style="color:white;text-shadow: none;">Book Ride</h1>
+                            
+                            
+                    </div>
+                    
+            <div data-role="content">
+                      <div class="loader"></div>
+                      <!--    <div class="ajaxloader"></div>  -->
+
+                        
+
+                       
+
+                        <fieldset class="ui-grid-a">
+                                <div class="ui-block-a"><label id="rideSeats" style="color:white;text-shadow: none;">Total </label>  </div>
+                                <div class="ui-block-b"><label id="rideAvailable" style="color:white;text-shadow: none;">Avaialable</label> </div>
+                        </fieldset> 
+
+                        <fieldset class="ui-grid-a">
+                                <div class="ui-block-a"><br><label for="name" style="color:white;text-shadow: none;">Number of Seats :</label> </div>
+                                <div class="ui-block-b"><input type="number" style="text-shadow: none;" placeholder="Enter number " max ='5' inputmode="numeric" id="seats" pattern="[0-9]*"/> </div>
+                    </fieldset> 
+
+                        <fieldset class="ui-grid-a">
+                                <div class="ui-block-a"><label style="color:white;text-shadow: none;" >Your id :</label>  </div>
+                                <div class="ui-block-b"><label id ="myid" style="color:white;text-shadow: none;">Your id :</label> </div>
+                        </fieldset> 
+                        <fieldset class="ui-grid-a">
+                                <div class="ui-block-a"><label style="color:white;text-shadow: none;">Ride ID:</label>  </div>
+                                <div class="ui-block-b"><label id ="rideId" style="color:white;text-shadow: none;">Your id :</label> </div>
+                        </fieldset> 
+                        
+                        <fieldset class="ui-grid-a">
+                                <div class="ui-block-a"><label style="color:white;text-shadow: none;">From:</label>  </div>
+                                <div class="ui-block-b"><label id ="rideFrom" style="color:white;text-shadow: none;">Your id :</label> </div>
+                        </fieldset> 
+                         
+                        <fieldset class="ui-grid-a">
+                                <div class="ui-block-a"><label style="color:white;text-shadow: none;" >To:</label>  </div>
+                                <div class="ui-block-b"><label id ="rideTo" style="color:white;text-shadow: none;">Your id :</label> </div>
+                        </fieldset> 
+
+                        <fieldset class="ui-grid-a">
+                                <div class="ui-block-a"><label style="color:white;text-shadow: none;">Date:</label>  </div>
+                                <div class="ui-block-b"><label id ="date" style="color:white;text-shadow: none;">Your id :</label> </div>
+                        </fieldset> 
+                        <fieldset class="ui-grid-a">
+                                <div class="ui-block-a"><label style="color:white;text-shadow: none;">Time:</label>  </div>
+                                <div class="ui-block-b"><label id ="time" style="color:white;text-shadow: none;">Your id :</label> </div>
+                        </fieldset> 
+
+                        <fieldset class="ui-grid-a">
+                                <div class="ui-block-a"><label style="color:white;text-shadow: none;" >Price per seat:</label>  </div>
+                                <div class="ui-block-b"><label id ="price" style="color:white;text-shadow: none;">Your id :</label> </div>
+                        </fieldset> 
+
+                        <fieldset class="ui-grid-a">
+                                <div class="ui-block-a"><label style="color:white;text-shadow: none;">Vehicle:</label>  </div>
+                                <div class="ui-block-b"><label id ="vehicle" style="color:white;text-shadow: none;">Your id :</label> </div>
+                        </fieldset> 
+                        <textarea id='comments' cols="40" rows="3" readonly>User comments here</textarea>
+
+                        <button id="bookMyRideButton" > Book My Ride</button>
+                
+                      
+                        <!--
+                      
+
+                      
+
+
+
+
+
+                        <div class="wrapper">
+                                <div class="content">
+                                        <label>Price/seat:</label>   
+                                    </div>
+                                <div class="right" id="price" >**price**</div>
+                        </div>
+
+                        <div class="wrapper">
+                                <div class="content">
+                                        <label>Seats to be booked:</label>   
+                                    </div>
+                                <div class="right" id="university" >**Uni**</div>
+                        </div>
+                        
+                        -->
+                       
+                                
+
+                        
+                        
+
+
+
+                    
+            </div>
+                    
+            </div>
+                    
+    
+    </body>
+</html>
+
+
+<script type="text/javascript">
+        $(window).load(function() {
+
+                $(".loader").fadeOut(1500);     
+        });
+        
+        //Below code shows loder when loads	
+        $( window ).unload(function() {
+                $(".loader").show();
+        });
+                
+        </script>

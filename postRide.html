@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+    <head>
+           
+          <meta http-equiv="Content-Security-Policy" content="default-src gap://ready file://* *; img-src * data:; style-src 'self' http://* https://* 'unsafe-inline'; script-src 'self' http://* https://* 'unsafe-inline' 'unsafe-eval'"> 
+           <meta name="format-detection" content="telephone=no">
+           <meta name="mobile-web-app-capable" content="yes">
+            <meta charset="utf-8">
+            <meta name="msapplication-tap-highlight" content="no">
+            <!-- <meta name="viewport" content="viewport-fit=cover, user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">  -->
+            
+            <meta name = "viewport" content="width=device-width, user-scalable = no" />
+            <!-- 
+            <link rel="stylesheet" href="css/jquery.mobile-1.5.0-alpha.1.min.css" />  
+            <script src="js/jquery-3.3.1.min.js"></script>
+            <script src="js/jquery.mobile-1.5.0-alpha.1.min.js"></script>  -->
+            <link rel="stylesheet" href="css/index.css" />
+            <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
+            <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+            <script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+             
+            <link rel="stylesheet" href="css/mybooksite.css" />
+            <!-- <link rel="stylesheet" href="css/test.css" />  -->
+            <link rel="stylesheet" href="css/BlandOr.css" />
+            
+            <script type="text/javascript" src="js/urlConfig.js"></script>
+            
+            <script type="text/javascript" src="js/postRide.js"></script>
+            <script type="text/javascript" src="js/moment.js"></script>
+            <script type="text/javascript" src="js/moment-timezone-with-data.js"></script>
+            
+            <script type="text/javascript" charset="utf-8" src="cordova.js"></script>  
+
+        <title>Login</title>
+    </head>
+    <body>
+
+            <div data-role="page" class= "noscroll" id="myPage" data-transition="none">
+                    <div data-role="header" data-position="fixed" data-hide-during-focus=""  >
+                            <button onclick="goback()" id="getmeback" style="color:white;text-shadow: none;" data-icon="carat-l">Back</button>
+                            
+                            <h1 style="color:white;text-shadow: none;">Post Ride</h1>
+                            
+                            
+                    </div>
+                    
+            <div data-role="content">
+                     <!--    <div class="loader"></div>
+                       <div class="ajaxloader"></div>  -->
+
+                        
+                       
+                                <div ><input type="text"  placeholder="Enter from location ( Only 20 Char) "  id="rideFrom" /> </div>
+                                <div ><input type="text"  placeholder="Enter To location ( Only 20 Char) "  id="rideTo" /> </div>
+                                        <input id="university-input" data-type="search" placeholder="Search University..." >
+                               
+                                        <ul id="university" data-role="listview" data-inset="true"  data-filter="true" data-filter-reveal="true" data-input="#university-input"></ul>
+                                        <fieldset class="ui-grid-a">
+                                                <div class="ui-block-a"><br><label for="datetime-local" style="color:white;text-shadow: none;">Select Date: </label>  </div>
+                                                <div class="ui-block-b"><input type="datetime-local"  placeholder="Enter Date "  id="rideDateTime" /> </div>
+                                        </fieldset> 
+                                        <!--
+                                        <fieldset class="ui-grid-a">
+                                                <div class="ui-block-a"><br><label for="date" style="color:white;text-shadow: none;">Select Date: </label>  </div>
+                                                <div class="ui-block-b"><input type="date"  placeholder="Enter Date "  id="rideDate" /> </div>
+                                        </fieldset> 
+                                        
+                                        <fieldset class="ui-grid-a">
+                                                        <div class="ui-block-a"><br><label for="time" style="color:white;text-shadow: none;">Select Time: </label>  </div>
+                                                        <div class="ui-block-b"><input type="time"  placeholder="Enter time "  id="rideTime"/> </div>
+                                        </fieldset> 
+                                        -->
+                                        <fieldset class="ui-grid-a">
+                                                        <div class="ui-block-a"><br><label for="time" style="color:white;text-shadow: none;">Number of Seats: </label>  </div>
+                                                        <div class="ui-block-b"><input type="number"  placeholder="Number of seats for ride" max ='5' inputmode="numeric" id="rideSeats" pattern="[0-9]*"/> </div>
+                                        </fieldset> 
+                                        <fieldset class="ui-grid-a">
+                                                        <div class="ui-block-a"><br><label for="time" style="color:white;text-shadow: none;">Price per seat: </label>  </div>
+                                                        <div class="ui-block-b"><input type="number"  placeholder="Enter Price per seat "  id="ridePrice"/> </div>
+                                        </fieldset> 
+                                <!--        
+                                <div ><input type="date"  placeholder="Enter Date "  id="rideDate" /> </div>
+                                <div ><input type="time"  placeholder="Enter time "  id="rideTime"/> </div>    
+                                             
+                                <div ><input type="number"  placeholder="Enter number of seats for ride" max ='5' inputmode="numeric" id="rideSeats" pattern="[0-9]*"/> </div>
+                                          
+                                <div ><input type="number"  placeholder="Enter Price per seat "  id="ridePrice"/> </div>
+                    -->  
+                                <div ><input type="text"  placeholder="Enter Vehicle type "  id="rideVeh"/> </div>
+                                 <!--
+                                <select id='myUniversityinPost' placeholder="University Name" ><option value="" hidden>Select University</option></select>
+                               
+                                <ul id="autocomplete" data-role="listview" data-inset="true" data-filter="true" data-filter-placeholder="Find a University..." data-filter-theme="a"></ul>
+                                
+                                <input id="university-input" data-type="search" placeholder="Search cars...">
+                                <ul id="university" data-role="listview" data-inset="true" data-filter="true" data-filter-reveal="true" data-input="#autocomplete-input"></ul>
+                                -->
+                                <div ><input type="text"  placeholder="Enter additional comment "  id="usercomments"/> </div>
+                       
+
+                                 
+                                
+                       
+                    
+            </div>
+            <div data-theme="a" data-role="footer" data-position="fixed" style="position:fixed;bottom:0;" data-tap-toggle="false" >
+                    
+                    <div class="ui-grid-b">
+                       <div class="ui-block-a" style="text-align: left;"></div> 
+                         <div class="ui-block-b" style="text-align: center;"><button id="postMyRideButton" >Post</button></div> 
+                        <div class="ui-block-c" style="text-align: right;"></div>              
+                    </div><!-- /grid-a -->
+
+                    
+            </div>
+                    
+    
+    </body>
+</html>
+
+
+<script type="text/javascript">
+        $(window).load(function() {
+
+                $(".loader").fadeOut(1500);     
+        });
+        
+        //Below code shows loder when loads	
+        $( window ).unload(function() {
+                $(".loader").show();
+        });
+                
+        </script>

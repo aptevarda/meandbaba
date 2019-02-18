@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html>
+    <head>
+           <!-- <meta http-equiv="Content-Security-Policy" content="default-src gap://ready file://* *; style-src 'self' http://* https://* 'unsafe-inline'; script-src 'self' http://* https://* 'unsafe-inline' 'unsafe-eval'"> -->
+          <meta http-equiv="Content-Security-Policy" content="default-src gap://ready file://* *; img-src * data:; style-src 'self' http://* https://* 'unsafe-inline'; script-src 'self' http://* https://* 'unsafe-inline' 'unsafe-eval'"> 
+           <meta name="format-detection" content="telephone=no">
+            <meta charset="utf-8">
+            <meta name="msapplication-tap-highlight" content="no">
+             <meta name="viewport" content="viewport-fit=cover, user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">  
+          
+            <!-- <meta name = "viewport" content="width=device-width, initial-scale=1" />  -->
+
+
+            <!-- 
+            <link rel="stylesheet" href="css/jquery.mobile-1.5.0-alpha.1.min.css" />  
+            <script src="js/jquery-3.3.1.min.js"></script>
+            <script src="js/jquery.mobile-1.5.0-alpha.1.min.js"></script>  -->
+
+            <link rel="stylesheet" href="css/index.css" />
+            
+            <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
+            <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+            <script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+             
+          <link rel="stylesheet" href="css/mybooksite.css" />  
+            <!-- <link rel="stylesheet" href="css/test.css" />  -->
+            <link rel="stylesheet" href="css/BlandOr.css" />
+          
+            <script type="text/javascript" src="js/urlConfig.js"></script>
+            <script type="text/javascript" src="js/postbook.js"></script>
+        <!-- Not working    <script type="text/javascript" src="js/AutoNumeric.js"></script>   -->
+          <script src="https://cdn.jsdelivr.net/npm/autonumeric@4.1.0"></script>  
+            
+             <script src='https://www.paypalobjects.com/js/external/api.js'></script>
+             
+            
+          
+            <script type="text/javascript" charset="utf-8" src="cordova.js"></script>  
+
+        <title>Login</title>
+    </head>
+    <body>
+
+        <div data-role="page" id="postbookPage" data-add-back-btn="true" >
+                    
+            <div data-role="header" data-position="fixed">
+                    <button onclick="goback()" id="getmeback" style="color:white;text-shadow: none;" data-icon="carat-l">Back</button>
+                    
+                    <h1 style="color:white;text-shadow: none;">Post Book</h1>
+                    
+                    
+            </div>
+                    
+            <div data-role="content">	
+                <!--  <div class="loader"></div>  -->
+                        <!-- <div style="border-bottom-width:0;" data-role="fieldcontain"> -->
+                        <input type="text" data-clear-btn="false" name="bookname" id="bookname" placeholder="Name of book">
+                        <fieldset class="ui-grid-a">
+                                <div  class="ui-block-a"><input type="text" data-clear-btn="false" name="bookname" placeholder="Your Price" id="salePrice"  class="demo"></div>
+                                <div  class="ui-block-b"><input type="text" data-clear-btn="false" name="bookname" readonly placeholder="Your Payment" id="payPrice" ></div>
+                        </fieldset>
+                        <input id="university-input" data-type="search" placeholder="Search University..." >      
+                        <ul id="university" data-role="listview" data-inset="true"  data-filter="true" data-filter-reveal="true" data-input="#university-input"></ul>
+                        
+                     <!--   <select id='myUniversityinPost' placeholder="University Name"><option value="" hidden>Select University</option></select> -->
+                        
+                        <textarea id="userComments" placeholder="Please enter specific comments" cols="50" rows="2" maxlength="125"></textarea>
+                        
+                       
+
+                        <div class="wrapper">
+                            <div class="right">
+                                <img  class="optional" id="smallImage" src="img/BookImage.jpg" width="170" height="170"/>    
+                                
+                            </div>   
+                            <div class="right">
+                                    
+                                <button id="cameratakepicture">Take Picture 1</button> 
+                                <button id="camerachangepicture">Change Picture 1</button>  
+                                </div>
+                        </div>
+                            <label>&nbsp&nbsp</label>
+                            <div class="wrapper">
+                                <div class="right">
+                                    <img  class="optional2" id="smallImage2" src="img/BookImage.jpg" width="170" height="170"/>    
+                                    
+                                </div>   
+                                <div class="right">
+                                        
+                                    <button id="cameratakepicture2">Take Picture 2</button> 
+                                    <button id="camerachangepicture2">Change Picture 2</button>  
+                                    </div>
+                            </div>
+                            <label>&nbsp&nbsp</label>
+
+
+                            <div class="wrapper" >
+                                    <div class="right">
+                                    <!--    <img  class="optional3" id="smallImage3" src="img/default_bookimage.png" width="170" height="170"/>  -->  
+                                        <img  class="optional3" id="smallImage3" src="img/BookImage.jpg" width="170" height="170"/> 
+                                    </div>   
+                                    <div class="right">
+                                            
+                                        <button id="cameratakepicture3">Take Picture 3</button> 
+                                        <button id="camerachangepicture3">Change Picture 3</button>  
+                                        </div>
+                                </div>
+
+                        <!--
+                        <div>
+                            <img  class="optional" id="smallImage" src="img/logo.png" width="50" height="50"/> 
+                            <button id="cameratakepicture">Take Picture 1</button> 
+                            <button id="camerachangepicture">Change Picture 1</button> 
+                                          
+                        </div>
+                        <div>
+                            <img  class="optional2" id="smallImage2" src="img/logo.png" width="50" height="50"/>
+                            <button id="cameratakepicture2">Take Picture 2</button> 
+                            <button id="camerachangepicture2">Change Picture 2</button> 
+                                     
+                        </div>
+                        <div>
+                            <img  class="optional3" id="smallImage3" src="img/logo.png" width="50" height="50"/> 
+                            <button id="cameratakepicture3">Take Picture 3</button> 
+                            <button id="camerachangepicture3">Change Picture 3</button> 
+                                          
+                        </div>
+                        -->
+                        <!-- below working button
+                        <button id="stripeconnect" value="Connect to Stripe"> Connect to Stripe</button>  
+                        -->
+                       <!-- <button disabled id="postbookbutton1" >Post Book</button>  -->
+                       
+
+                      <!-- below code snippet is for payapl authetication
+                      <span id='lippButton'></span>
+                      <script src='https://www.paypalobjects.com/js/external/api.js'></script>
+                      <script>
+                      paypal.use( ['login'], function (login) {
+                        login.render ({
+                          "appid":"AUrUkOIbK1wpMzJQuGPS46DYDW8PgKMgbyHy_W_eagFErhyBXECEDwS3DBhM3hn17YOSA-X6tVfcb2X7",
+                          "authend":"sandbox",
+                          "state":"champion",
+                          "nonce":"test111111111111",
+                          "scopes":"openid profile email",
+                          "containerid":"lippButton",
+                          "locale":"en-us",
+                          "returnurl":"http://127.0.0.1:3000/executive/paypalAuthorize",
+                          
+                        });
+                      });
+                      </script>
+
+                    -->
+                    &nbsp
+                    <div style="background-color : grey;">
+                        &nbsp
+                        
+                                <div data-role="collapsible" data-theme="b" data-content-theme="b">
+                                        <h4>Payment policy</h4>
+                                        <p>Please note that we use Paypal to pay you after book is sold. To do this , please click "Login with Paypal button" if you already have paypal id. In this way, we can capture required etails so that we can pay you. If you do not have paypal id , then we will create the id with your username and intimation will be send to you once payment is doone.Ideally we would like you to have paypal id for smooth payment. </p>
+                                    </div>
+                               
+                                <input type="checkbox" name="checkbox-mini-0" id="paymentpolicyAgree" data-mini="true">
+                                <label for="paymentpolicyAgree">I reviewed and agree with payment policy</label>
+                        
+                        &nbsp
+                            <button id="paypalAutho"> </button> 
+                        </div>
+                        &nbsp
+
+                       <!-- <button id="paypalPayout" value="Payout"> Payout</button> -->
+                                
+                        
+                    
+                      <!-- code ends for paypal authentication-->  
+                    
+            </div><!-- /content -->
+            <div data-theme="a" data-role="footer" data-position="fixed" style="position:fixed;bottom:0;" data-tap-toggle="false" >
+                    
+                <div class="ui-grid-b">
+                   <div class="ui-block-a" style="text-align: left;"></div> 
+                     <div class="ui-block-b" style="text-align: center;"><button id="postbookbutton" >Post Book</button></div> 
+                    <div class="ui-block-c" style="text-align: right;"></div>              
+                </div><!-- /grid-a -->
+                          
+        </div>
+                    
+            </div><!-- /page -->
+                    
+    
+    </body>
+</html>

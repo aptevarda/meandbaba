@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+    <head>
+            <!-- <meta http-equiv="Content-Security-Policy" content="default-src gap://ready file://* *; style-src 'self' http://* https://* 'unsafe-inline'; script-src 'self' http://* https://* 'unsafe-inline' 'unsafe-eval'"> -->
+            <meta http-equiv="Content-Security-Policy" content="default-src gap://ready file://* *; img-src * data:; style-src 'self' http://* https://* 'unsafe-inline'; script-src 'self' http://* https://* 'unsafe-inline' 'unsafe-eval'">
+            <meta name="format-detection" content="telephone=no">
+            <meta charset="utf-8">
+            <meta name="msapplication-tap-highlight" content="no">
+           <meta name="viewport" content="viewport-fit=cover, user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">  
+            
+          <!--   <meta name = "viewport" content="width=device-width, user-scalable = no" /> -->
+            <!-- 
+            <link rel="stylesheet" href="css/jquery.mobile-1.5.0-alpha.1.min.css" />  
+            <script src="js/jquery-3.3.1.min.js"></script>
+            <script src="js/jquery.mobile-1.5.0-alpha.1.min.js"></script>  -->
+            
+            <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
+            <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+            <script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+            <link rel="stylesheet" href="css/mybooksite.css" />
+          <!-- <link rel="stylesheet" href="css/test.css" />  -->
+          <link rel="stylesheet" href="css/BlandOr.css" />
+          <script type="text/javascript" src="js/urlConfig.js"></script>
+        <script type="text/javascript" src="js/search.js"></script>
+        <script type="text/javascript" charset="utf-8" src="cordova.js"></script>  
+    </head>
+
+        <title>Login</title>
+    </head>
+    <body>
+
+        <div data-role="page" data-add-back-btn = "true" class= "no-scroll">
+            <!--
+            <div data-theme="a" data-role="Header" data-position="fixed">
+                    
+                    <div class="ui-grid-b">
+                        <div class="ui-block-a" style="text-align: left;"></div>
+                        <div class="ui-block-b" style="text-align: center;">Book List</div>
+                        <div class="ui-block-c" style="text-align: right;"><input type="button" id="logmeOut" value="Logout"></div>                
+                    </div>
+                              
+            </div>
+        -->
+                <div data-role="header" data-position="fixed">
+                
+                <h1 style="color:white;text-shadow: none;">Book List</h1>
+           <!--    <Button id="logmeOut"  data-icon="delete">Logout</Button>   -->
+                <Button id="home"  data-icon="home" style="color:white;text-shadow: none;">Home</Button>
+                <Button id="logmeOut"  data-icon="power" style="color:white;text-shadow: none;">Logout</Button>
+              <!--  <button href="#" data-role="button" id="refresh" data-icon="refresh" data-iconpos="notext">Refresh</button> -->
+
+                <fieldset class="ui-grid-a">
+                        <div class="ui-block-a" style="width:90%"><form class="ui-filterable">
+                                <input id="filterBasic-input" data-type="search" placeholder="Search rides ...">
+                        </form>  </div>
+                        <div class="ui-block-b" style="width:10%"><button href="#" data-role="button" id="refresh" data-icon="refresh" data-iconpos="notext">Refresh</button> </div>
+                    </fieldset> 
+                
+               </div> 
+                    
+            <div data-role="content">	
+                 <!--  <input type="button" id="sellbookbutton" value="Sell a Book">  -->
+                   
+            <!--   <div class="loader"></div>  -->
+               <!--    <form class="ui-filterable">
+                        <input id="filterBasic-input" data-type="search" placeholder="Search books ...">
+                    </form>   -->
+                
+<!--data-split-theme="a"-->
+<!--data-theme="a"-->
+                    <!--
+                    <div class="listCont">
+                  
+                    <ul data-role="listview"  data-split-icon="shop"  data-inset="true"  id="output" >   
+
+                    </div>
+                -->
+                        <ul data-role="listview"  data-split-icon="shop"    id="output" style="padding-top:1px;">  
+                            </ul>
+                    
+                    <div data-role="popup" id="purchase" data-overlay-theme="b" class="ui-content" style="max-width:340px; padding-bottom:2em;">
+                        <h3>Purchase Book?</h3>
+                        <p>Your will be directed to another page to complete this purchase.</p>
+                            <button id="buyButton" data-rel="back" class="ui-shadow ui-btn ui-corner-all ui-btn-b ui-icon-check ui-btn-icon-left ui-btn-inline ui-mini">Buy</button>
+                            <a href="index.html" data-rel="back" class="ui-shadow ui-btn ui-corner-all ui-btn-inline ui-mini">Cancel</a>
+                    </div>
+                    
+            </div><!-- /content -->
+
+            <div data-theme="a" data-role="footer" data-position="fixed">
+                    
+                        <div class="ui-grid-b" style= "color:white;text-shadow: none;">
+                            <div class="ui-block-a"  style="text-align: left;"><input type="button" data-icon="search" id="saleHistorybutton" value="Your Sale" ></div>
+                            <div class="ui-block-b" style="text-align: center;"><input type="button" id="sellbookbutton" value="Sell a Book"></div>
+                            <div class="ui-block-c"  style="text-align: right;"><input type="button"  data-icon="search" id="purchasedBooksbutton" value="Your Buy"></div>                
+                        </div><!-- /grid-a -->
+                                  
+                </div>
+                   <!-- 
+            <div data-role="footer" data-position = "fixed">
+                    <input type="button" id="sellbookbutton" value="Sell a Book">
+                </div> -->
+                    
+            `</div><!-- /page -->
+                    
+    
+    </body>
+</html>
