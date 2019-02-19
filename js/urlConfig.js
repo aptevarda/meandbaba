@@ -20,7 +20,7 @@ urluserCrud_name = 'http://booksite.a2hosted.com:35001/userCrud/';
 //var populateuniName_url = 'http://192.168.0.24:3000/executive/populateuniName';
 var populateuniName_url = urlexecutive_name+'populateuniName';
 //var create_url = 'http://192.168.0.24:3000/executive/create';
-var create_url = urlexecutive_name + 'create';
+var create_url = urluserCrud_name + 'create';
 
 //index.js
 
@@ -28,7 +28,7 @@ var create_url = urlexecutive_name + 'create';
 var loginvalidation_url = urluserCrud_name + 'loginvalidation';
 
 //var codevalidation_url = 'http://192.168.0.24:3000/executive/codevalidation';
-var codevalidation_url = urlexecutive_name + 'codevalidation';
+var codevalidation_url = urluserCrud_name + 'codevalidation';
 //var savePushNotifyToken_url = 'http://192.168.0.24:3000/executive/savePushNotifyToken';
 var savePushNotifyToken_url = urlexecutive_name + 'savePushNotifyToken';
 
@@ -40,9 +40,9 @@ var pushmessage_url = urlexecutive_name + 'pushmessage';
 
 //forgotpassword.js
 //var forgotpassword_url = 'http://192.168.0.24:3000/executive/forgotpassword';
-var forgotpassword_url = urlexecutive_name + 'forgotpassword';
-var verifyrandomcode_url = urlexecutive_name + 'verifyrandomcode';
-var changepassword_url = urlexecutive_name + 'changepassword';
+var forgotpassword_url = urluserCrud_name + 'forgotpassword';
+var verifyrandomcode_url = urluserCrud_name + 'verifyrandomcode';
+var changepassword_url = urluserCrud_name + 'changepassword';
 
 //settings.html
 var saveMySettings_url = urluserCrud_name + 'saveMySettings';
