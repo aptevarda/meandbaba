@@ -29,7 +29,7 @@ $("#getmeback").click(function() {
             alert('Please enter the University values in the fields to proceed!');
         //}else if ($('#firstName').val() == '' || $('#lastName').val() == ''|| uninameText == "not selected" || $('#email').val() == '' || $('#telephone').val() == '' || $('#password').val() == '' || $('#university').val() == '' || $('#myUniversity option:selected').text() == "Select University" || !$('#agree_terms').prop('checked')) {
         }else if ($('#firstName').val() == '' || $('#lastName').val() == ''|| uninameText == "not selected" || $('#email').val() == '' || $('#telephone').val() == '' || $('#password').val() == '' || !$('#agree_terms').prop('checked')) {    
-            alert('Please fill in all the fields before registering,select University from drop down list and select "I agree "for reveiwing and agreeing terms and policie');
+            alert('Please fill in all the fields before registering, then select your university from the drop down list, and select "I agree" for reveiwing and agreeing to our terms and policies.');
             window.location = "register.html";
         }else {
             register_user();
