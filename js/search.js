@@ -4,7 +4,7 @@ document.addEventListener("deviceready", startup, false);
 function startup() {
     //console.log(device.platform);
    // alert("rerached search");
-  //$(".loader").fadeOut(1000);
+  //$(".loader").fadeOut(10);
 
   $(document).bind('mobileinit', function () {
     //Loader settings
@@ -38,7 +38,8 @@ var interval = setInterval(function(){
     // $('.ui-icon-search').css("background-color", "#333333");
     // Logout click
     $('#logmeOut').click (function(){
-        sessionStorage.setItem("usernameId",'')
+        sessionStorage.setItem("usernameId",'');
+        window.sessionStorage.setItem("initial_Run","Repeat");
         //alert(sessionStorage.getItem("usernameId"));
         window.location= "index.html";
     });
@@ -50,6 +51,13 @@ var interval = setInterval(function(){
     });
 
     $('#buyButton').click (function(){
+       
+        /*
+        setTimeout( function() {
+            window.location= "buybook.html";
+        }, 200)
+        $(".loader").show();
+        */
        // alert("redirecting to buybook");
        /*
        var interval = setInterval(function(){
@@ -64,7 +72,27 @@ var interval = setInterval(function(){
         },1); 
         */
        
-      checkbookStatus();
+        // COMMENTED NOW checkbookStatus();
+        
+        checkbookStatuswithcallback(function(err,success){
+            var interval = setInterval(function(){
+                $.mobile.loading('show');
+                clearInterval(interval);
+                },1); 
+                $("#output").hide();
+            if(err){
+
+            }else if(success == "YES"){
+                console.log("in call checkbookstatus");
+            
+            window.location= "buybook.html";
+            var interval = setInterval(function(){
+                $.mobile.loading('show');
+                clearInterval(interval);
+                },1); 
+            }
+        });
+        
        // })
        //window.location= "buybook.html";
     });
@@ -213,7 +241,7 @@ var interval = setInterval(function(){
 
     //end "detail page re-dierction"
 
-}
+}  //startup end
 
 
 
@@ -324,6 +352,105 @@ function checkbookStatus(){
     
     
 }
+
+//checkbook call back
+
+function checkbookStatuswithcallback(callback){
+    bookId = sessionStorage.getItem("selectedBookIdforPurchase");
+    //alert(bookId);
+    var check_availability
+    /*
+    var interval = setInterval(function(){
+        $.mobile.loading('show',{
+            text: 'foo',
+            textVisible: true,
+            theme: 'z',
+            html: "<span class='ui-bar ui-overlay-c ui-corner-all'><img src='./css/5.gif' /><h2>..Page is loading</h2></span>"
+          });
+    
+        clearInterval(interval);
+        },1); 
+        */
+        var interval = setInterval(function(){
+            $.mobile.loading('show');
+            clearInterval(interval);
+        },1); 
+        
+       //$(".loader").show();
+       // $('#output').hide();
+    $.ajax({
+        type: "POST",
+        url: checkbookStatus_url,
+        dataType: "json",
+        //timeout: 100000,
+        data: JSON.stringify( {  "bookId": bookId }),
+        contentType: "application/json",
+        success: function(data, status){
+            $.each(data, function(i, item) {
+                
+               if(item.deleted == 'Y' || item.sold == 'Y') {
+               // alert("should return not available");
+                check_availability ='N';
+                //return "not available";
+                callback(0,"NO");
+                
+               }else{
+               // alert("should return available");
+                check_availability = 'Y';
+                //return "available";
+                callback(0,"YES");
+               }  
+                   
+           });
+           /*
+           if(check_availability == 'Y') 
+               {
+               
+                    console.log("existing Search");
+                    
+                  //window.location= "buybook.html";
+                  setTimeout( function() {
+                    window.location= "buybook.html";
+                }, 20)
+                   
+               }else{
+                navigator.notification.alert(
+                    'It seems that book has been just sold',  // message
+                    alertDismissed,         // callback
+                    'Backend Issues',            // title
+                    'Done'                  // buttonName
+                );
+                var interval = setInterval(function(){
+                    $.mobile.loading('hide');
+                    clearInterval(interval);
+                    },1); 
+                window.location ="search.html";
+               }
+            */
+        },
+    
+        error: function(XMLHttpRequest, textStatus, errorThrown) {
+            //show error message
+            console.log(textStatus);
+            navigator.notification.alert(
+                'Not able to get the status  book list. Please try again',  // message
+                alertDismissed,         // callback
+                'Backend Issues',            // title
+                'Done'                  // buttonName
+            );
+            callback(1,0);
+           // return "not available";
+           var interval = setInterval(function(){
+            $.mobile.loading('hide');
+            clearInterval(interval);
+            },1); 
+            
+        }
+    });
+    
+    
+}
+
 
 
 

@@ -38,7 +38,8 @@ function startup() {
 
     // Logout click
     $('#logmeOut').click (function(){
-        sessionStorage.setItem("usernameId",'')
+        sessionStorage.setItem("usernameId",'');
+        window.sessionStorage.setItem("initial_Run","Repeat");
         //alert(sessionStorage.getItem("usernameId"));
         window.location= "index.html";
     });

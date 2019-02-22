@@ -740,6 +740,8 @@ function findBuyerPhone(tokenEmail,callback){
                         var JSONStringify = JSON.stringify(response);
                         var JSONparse = JSON.parse(JSONStringify);
                         console.log("responce is " + JSONparse.code + " other "+ JSONStringify.code);
+
+                        setTimeout(function(){
                         if (response.code == 441) {
                         //alert("delisting 441");
                         navigator.notification.alert(
@@ -769,8 +771,10 @@ function findBuyerPhone(tokenEmail,callback){
                                 $.mobile.loading('show');
                                 clearInterval(interval);
                                 },1); 
+                                window.location ="saleHistory.html";
+                            }, 2000);
 
-                        setTimeout(function(){ window.location ="saleHistory.html"; }, 2000);
+                        //setTimeout(function(){ window.location ="saleHistory.html"; }, 2000);
                         
                         
                     },
@@ -845,6 +849,8 @@ function findBuyerPhone(tokenEmail,callback){
                                 var JSONStringify = JSON.stringify(response);
                              var JSONparse = JSON.parse(JSONStringify);
                              console.log("responce is " + JSONparse.code + "other "+ JSONStringify.code);
+
+                             setTimeout(function(){
                                 if (response.code == 441) {
                                 //alert("delisting 441");
                                 navigator.notification.alert(
@@ -873,6 +879,7 @@ function findBuyerPhone(tokenEmail,callback){
                                         clearInterval(interval);
                                         },1); 
                                 window.location ="saleHistory.html";
+                                }, 2000);
                             },
                             error: function(XMLHttpRequest, textStatus, errorThrown) {
                                 //show error message

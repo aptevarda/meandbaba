@@ -193,7 +193,7 @@ function startup() {
             //alert('Please enter the name of a book , price ,select University and capture all image!');
             //alert("what1");
             navigator.notification.alert(
-                'Please enter the name of a book , price ,select University and capture all image!'+uninameText,  // message
+                'Please enter the name of a book , price ,select University and capture all image!',  // message
                 alertDismissed,         // callback
                 'Try Again',            // title
                 'Done'                  // buttonName
@@ -394,7 +394,7 @@ working code for stripe oauth */
                     error: function(XMLHttpRequest, textStatus, errorThrown) {
                         //show error message
                         navigator.notification.alert(
-                            'error in stripe url',  // message
+                            'error in url',  // message
                             alertDismissed,         // callback
                             'Backend Issues',            // title
                             'Done'                  // buttonName
@@ -769,22 +769,25 @@ function imagetoserver(imagedata){
 function postbook(capturedImage) {
     
     //var final_url = 'http://192.168.0.19:3000/executive/postbook';
+    $('#postbookbutton').attr('disabled','disabled');
     console.log("reached postbook with--->"+capturedImage);
    // alert($('#userComments').val());
    // alert($('#myUniversityinPost option:selected').text());
     //alert(sessionStorage.getItem("usernameId"));
     //navigator.camera.getPicture(function(pictureHere){
- 
+            
         var interval = setInterval(function(){
             $.mobile.loading('show',{
                 text: 'foo',
                 textVisible: true,
                 theme: 'z',
-                html: "<span class='ui-bar ui-overlay-c ui-corner-all'><img src='./css/5.gif' /><h2>loading</h2></span>"
+                html: "<span class='ui-bar ui-overlay-c ui-corner-all'><img src='./css/5.gif' /><h2>Posting book Online ..</h2></span>"
               });
         
             clearInterval(interval);
             },1);  
+            
+           
     $.ajax({
         type: "POST",
         url: postbook_url,
@@ -830,6 +833,7 @@ function postbook(capturedImage) {
             //alert("Phto loading / Post book failed");
             //alert("error is"+ errorThrown);
             //alert(XMLHttpRequest);
+            $('#postbookbutton').removeAttr('disabled');
             var interval = setInterval(function(){
                 $.mobile.loading('hide');
                 clearInterval(interval);

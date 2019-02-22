@@ -10,12 +10,92 @@ function checkConnection(){
         window.location = "offlinePage.html";
     }
 }
+//windows.sessionStorage.setItem("initial_Run",1);
 
 function startup() {
     //alert("reached startup function");
     //forgot password username
     $(".loader").fadeOut(1100);
     screen.orientation.lock('portrait');
+    if(! ( window.localStorage.getItem ("defaultTouchId" )) ){
+       // alert("defaultitem is null");
+        window.localStorage.setItem("defaultTouchId","No TOUCH ID")
+    }
+
+    if(! ( window.sessionStorage.getItem('initial_Run')) ){
+        // alert("defaultitem is null");
+        window.sessionStorage.setItem("initial_Run","");
+     }
+
+    window.plugins.touchid.isAvailable(function(){
+        //alert("Touch id avaiable");
+        },function(msg){
+           // alert("no tocuh id " + msg);
+            $("#myTouchId").remove();
+        }
+        
+        );  
+       
+
+    if(window.sessionStorage.getItem('initial_Run') == "" ){ 
+       //alert("initial run is 1"); 
+    window.plugins.touchid.isAvailable(function(){
+        if (window.localStorage.getItem("defaultTouchId") === "No TOUCH ID"){
+
+        }else{
+            //Assign localstorage email to email.val
+            $('#email').val(window.localStorage.getItem("defaultTouchId"));
+            //alert(window.localStorage.getItem("defaultTouchId"));
+            window.plugins.touchid.has($('#email').val(), function() {
+                console.log("Touch ID avaialble and Password key available");
+                window.plugins.touchid.verify($('#email').val(), "Touch id for "+$('#email').val(), function(password) {
+                    //alert("Tocuh " + password + $('#email').val() );
+                     $('#password').val(password);
+                     user_login();
+                 },function(errorCode){
+                   console.log(" Either cancelled or error" + errorCode)
+                   //alert("You have either cancelled or There is issue in verifying Touch ID. Please login using your credentials");
+                   /*
+                   //delete the Touch ID
+                   
+                   window.plugins.touchid.delete($('#email').val(), function() {
+                    //alert("Password key deleted");
+                    });
+                   //end delete Touch ID
+                   */
+                   $('#email').val("");
+                   //window.localStorage.setItem("defaultTouchId","No TOUCH ID");
+    
+                 }
+                )
+            }, function() {
+                console.log("Touch ID available but no Password Key available");
+                //alert("There is issue in verifying Touch ID");
+                /*
+                window.plugins.touchid.delete($('#email').val(), function() {
+                   // alert("Password key deleted");
+                    });
+                   //end delete Touch ID
+                   */
+                  navigator.notification.alert(
+                    'There is issue in verifying Touch ID. Please login using your credentails and set Touch ID again.',  // message
+                    alertDismissed,         // callback
+                    'Enter Credentials',            // title
+                    'Done'                  // buttonName
+                );
+                   $('#email').val("");
+                   //window.localStorage.setItem("defaultTouchId","No TOUCH ID");
+            });
+            //verify and extract password if touch id verifies
+
+        }
+    })//touch id is avaialable 
+}
+
+   
+
+    
+
 
     $(document).bind('mobileinit', function () {
         //Loader settings
@@ -36,6 +116,38 @@ function startup() {
     });
     //forgot pwd
     var login = $('#loginbutton').click(function() {
+    if ($("#myTouchId").is(':checked')){
+        //window.localStorage.setItem("defaultTouchId", $('#email').val());
+        //alert(window.localStorage.getItem("defaultTouchId"));
+        
+        if ($('#email').val() == '' || $('#password').val() == '') {
+            //alert('Please enter an email and a password. To create an account, please click the Register button below.');
+            navigator.notification.alert(
+                'Please enter an email and a password to proceed with Touch ID settings. To create an account, please click the Register button below.',  // message
+                alertDismissed,         // callback
+                'Enter Credentials',            // title
+                'Done'                  // buttonName
+            );
+            window.location = "index.html";
+            }else{
+                window.localStorage.setItem("defaultTouchId", $('#email').val());
+                //verfi and save 
+                //$('#email').val() = window.localStorage.getItem("defaultTouchId");
+                alert(window.localStorage.getItem("defaultTouchId"));
+                if (window.plugins) {
+                   
+                        //alert("You are requesting touch id but you do not have touch id saved so we are going to save it now " );
+                        window.plugins.touchid.save($('#email').val(), $('#password').val(), function() {
+                            alert("Password saved");
+                        });
+                    
+                    }
+                    user_login();
+                    }
+
+                //verify and save first time            
+        
+    } else{   // touch id not checked 
         if ($('#email').val() == '' || $('#password').val() == '') {
             //alert('Please enter an email and a password. To create an account, please click the Register button below.');
             navigator.notification.alert(
@@ -45,9 +157,13 @@ function startup() {
                 'Done'                  // buttonName
             );
             window.location = "index.html";
-        }else {
+        }else{
             user_login();
         }
+
+
+     } //touch id not checked ends
+    
     });
     var register = $('#registerbutton').click(function() {
         user_register();
@@ -110,6 +226,8 @@ function startup() {
     });
 
 }
+
+
     
 function user_login() {
     //alert("reached user_login function");
@@ -163,7 +281,7 @@ function user_login() {
                 'Try Again',            // title
                 'Done'                  // buttonName
             );
-               
+               deleteTouchID();
                window.location = "index.html";
            }else if (response.code == 140) {
               // alert('Please enter the verification code sent to the email you entered when creating your account.');
@@ -184,7 +302,7 @@ function user_login() {
                   'Banned',            // title
                   'Done'                  // buttonName
               );
-
+                    deleteTouchID();
                //vinay add
            }else {
                //alert('The email you entered does not exist! Please try again.');
@@ -194,7 +312,8 @@ function user_login() {
                 'No Success',            // title
                 'Done'                  // buttonName
             );
-               window.location = "index.html";
+                deleteTouchID();
+                window.location = "index.html";
            }
              /*  
            var interval = setInterval(function(){
@@ -212,6 +331,7 @@ function user_login() {
                 'Backend Issues',            // title
                 'Done'                  // buttonName
             );
+            deleteTouchID();
            // alert("error is"+ errorThrown);
            // alert(XMLHttpRequest);
          /*  
@@ -274,6 +394,7 @@ function verify_email() {
                 'Failed',            // title
                 'Done'                  // buttonName
             );
+            deleteTouchID();
            }
         },
         error: function(XMLHttpRequest, textStatus, errorThrown) {
@@ -284,6 +405,7 @@ function verify_email() {
                 'Backend Issues',            // title
                 'Done'                  // buttonName
             );
+            deleteTouchID();
            // alert("error is"+ errorThrown);
            // alert(XMLHttpRequest);
         }
@@ -412,6 +534,82 @@ function sendPushnotofication(){
 
 }
 
+function deleteTouchID(){
+//this function is used if user verification is failed
+window.plugins.touchid.isAvailable(function(){
+    window.plugins.touchid.delete($('#email').val(), function() {
+        //alert("Password key deleted");
+        });
+       //end delete Touch ID
+       $('#email').val("");
+       window.localStorage.setItem("defaultTouchId","No TOUCH ID");
+
+});
+
+}
+
 function alertDismissed() {
     // do something
+}
+
+document.addEventListener("resume", startAgain, false);
+
+function startAgain(){
+//alert("started again");
+window.sessionStorage.setItem("initial_Run","");
+if(window.sessionStorage.getItem('initial_Run') == "" ){ 
+    //alert("initial run is 1"); 
+ window.plugins.touchid.isAvailable(function(){
+     if (window.localStorage.getItem("defaultTouchId") === "No TOUCH ID"){
+
+     }else{
+         //Assign localstorage email to email.val
+         $('#email').val(window.localStorage.getItem("defaultTouchId"));
+         //alert(window.localStorage.getItem("defaultTouchId"));
+         window.plugins.touchid.has($('#email').val(), function() {
+             console.log("Touch ID avaialble and Password key available");
+             window.plugins.touchid.verify($('#email').val(), "Touch id for "+$('#email').val(), function(password) {
+                 //alert("Tocuh " + password + $('#email').val() );
+                  $('#password').val(password);
+                  user_login();
+              },function(errorCode){
+                console.log(" Either cancelled or error" + errorCode)
+                //alert("You have either cancelled or There is issue in verifying Touch ID. Please login using your credentials");
+                /*
+                //delete the Touch ID
+                
+                window.plugins.touchid.delete($('#email').val(), function() {
+                 //alert("Password key deleted");
+                 });
+                //end delete Touch ID
+                */
+                $('#email').val("");
+                //window.localStorage.setItem("defaultTouchId","No TOUCH ID");
+ 
+              }
+             )
+         }, function() {
+             console.log("Touch ID available but no Password Key available");
+             //alert("There is issue in verifying Touch ID");
+             /*
+             window.plugins.touchid.delete($('#email').val(), function() {
+                // alert("Password key deleted");
+                 });
+                //end delete Touch ID
+                */
+               navigator.notification.alert(
+                 'There is issue in verifying Touch ID. Please login using your credentails and set Touch ID again.',  // message
+                 alertDismissed,         // callback
+                 'Enter Credentials',            // title
+                 'Done'                  // buttonName
+             );
+                $('#email').val("");
+                //window.localStorage.setItem("defaultTouchId","No TOUCH ID");
+         });
+         //verify and extract password if touch id verifies
+
+     }
+ })//touch id is avaialable 
+}
+
 }

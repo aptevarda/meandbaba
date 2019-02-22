@@ -1,5 +1,7 @@
 //window.addEventListener("load", startup);
 document.addEventListener("deviceready", startup, false);
+var actionItems = 0;
+var globalitems;
 
 function startup() {
     //console.log(device.platform);
@@ -33,8 +35,11 @@ var interval = setInterval(function(){
 
    $('#logmeOut').click (function(){
     sessionStorage.setItem("usernameId",'')
+    window.sessionStorage.setItem("initial_Run","Repeat");
     //alert(sessionStorage.getItem("usernameId"));
     window.location= "index.html";
+    //window.location= "logout.html";
+
     });
    
     $('#ridesite').click (function(){
@@ -173,7 +178,7 @@ var interval = setInterval(function(){
     
 
 //salehistory details
-            var allItems = '';
+         var allItems = '';
             var interval = setInterval(function(){
             $.mobile.loading('show');
             clearInterval(interval);
@@ -196,19 +201,25 @@ var interval = setInterval(function(){
 
                         itemtext = "Transaction id : "+ item.tokenId + ". Please contact buyer (If not done yet) to complete transaction for book ";
                         allItems += '<li data-email = "'+ item.tokenEmail +'"data-rowid="' + item.id + '"><a href="#"><div data-role="controlgroup" data-type="horizontal"><p class="wrap" style="color:black;font-size:12px;font-weight:bold;">' + itemtext + '-'+ item.bookname + '</p><button class="findbuyerPhone">Buyer Phone</button></div></a></li>';
-                        
+                        actionItems++;
+                        $("#actionitem").text("You have "+actionItems + " action items");
                     }else if (item.status == 'A'){
                         //alert(item.tokenEmail);
                     
                     itemtext = "Transaction id : "+ item.tokenId + ". Please contact buyer (If not done yet) to complete transaction for book ";
                     allItems += '<li data-email = "'+ item.tokenEmail +'"data-rowid="' + item.id + '"><a href="#"><div data-role="controlgroup" data-type="horizontal"><p class="wrap" style="color:black;font-size:12px;font-weight:bold;">' + itemtext + '-'+ item.bookname + '</p><button class="findbuyerPhone">Buyer Phone</button></div></a></li>';
-                    
+                    actionItems++;
+                    $("#actionitem").text("You have "+actionItems + " action items");
                      }
                     
                     });
                 
-                     $("#actionList").empty().append(allItems).listview("refresh").enhanceWithin();
+                     //$("#actionList").empty().append(allItems).listview("refresh").enhanceWithin();
+                     setTimeout(function(){
+                        $("#actionList").append(allItems).listview("refresh").enhanceWithin();
+                     }, 500);
                     //$("#actionList").empty().append("test").listview("refresh").enhanceWithin();
+                   
 
                 //
                 var interval = setInterval(function(){
@@ -235,12 +246,13 @@ var interval = setInterval(function(){
             }
             
             });//ajax end
+            
+            
 
-
-//salehistory copy
+//salehistory end
 
 //buyhistory 
-        var allbuyItems = '';
+var allbuyItems = '';
         
         $.ajax({
             type: "POST",
@@ -258,19 +270,25 @@ var interval = setInterval(function(){
                         //itemtext = "Transaction id : "+ item.tokenId + ".\n You OFFERED to buy this item on "+ new Date(item.posted_on).toDateString() +"\n Seller revised price on " + new Date(item.priceRevised_on).toDateString()
                         itemtext = "Transaction id : "+ item.tokenId + " - Please confirm if you have received this book ( "+ item.bookName + " )after price revision. Seller revised price to $" + item.revised_price  +" on " + moment(item.priceRevised_on).format('llll');
                         allbuyItems += '<li data-rowid="' + item.bookId + '"><a href="#"><div data-role="controlgroup" data-type="horizontal"><p class="wrap" style="color:black;font-size:12px;font-weight:bold;">' + itemtext  +'</p><button class="buyConfirm">Buy Confirm</button><button class="buyCancel">Cancel</button></div></a></li>';
-                       
+                        actionItems++;
+                        $("#actionitem").text("You have "+actionItems + " action items");
                        }else if (item.status == 'A'){
         
                         //itemtext = "Transaction id : "+ item.tokenId + ".\n You OFFERED to buy this item on " + new Date(item.posted_on).toDateString();
                         itemtext = "Transaction id : "+ item.tokenId + " - Please confirm if you have received this book ( "+ item.bookName  +" ) by clicking 'Buy Confirm.";
                         allbuyItems += '<li data-rowid="' + item.bookId + '"><a href="#"><div data-role="controlgroup" data-type="horizontal"><p class="wrap" style="color:black;font-size:12px;font-weight:bold;">' + itemtext  +'</p><button class="buyConfirm">Buy Confirm</button><button class="buyCancel">Cancel</button></div></a></li>';
-                       
+                        actionItems++;
+                        $("#actionitem").text("You have "+actionItems + " action items");
                        }
          
                         });
                     
                 
-                $("#actionList").append(allbuyItems).listview("refresh").enhanceWithin();
+               // $("#actionList").append(allbuyItems).listview("refresh").enhanceWithin();
+
+                setTimeout(function(){
+                    $("#actionList").append(allbuyItems).listview("refresh").enhanceWithin();
+                 }, 500);
                 var interval = setInterval(function(){
                     $.mobile.loading('hide');
                     clearInterval(interval);
@@ -302,7 +320,8 @@ var interval = setInterval(function(){
 var allRideOwnerItems = '';
 $.ajax({
     type: "POST",
-    url: rideOwnerHistory_url,
+    //url: rideOwnerHistory_url,
+    url: populaterideownerHistory_url,
     dataType: "json",
     timeout: 100000,
     data: JSON.stringify( { 
@@ -319,20 +338,22 @@ $.ajax({
                          if (  rideDate.isAfter(todayDate)  ){
                             if(item.rideStatus == ""){
                              // alert("after comparsion" + item.rideId) 
-                            itemtext = "Ride id : "+ item.rideId + ".\n Nobody has BOOKED this ride yet.";
+                            itemtext = "Ride id : "+ item.rideId + ".\n BOOKED :" + item.rideBooked;
                             // allItems += '<li data-trx="' + item.trxId + '" data-rowid="' + item.rideId + '"data-seats="'+ item.seats +'"><a href="#"><div data-role="controlgroup" data-type="horizontal"><p class="wrap" style="color:black;font-size:12px;font-weight:bold;">(' + item.rideId + ')'+ item.rideId + '<br> Price: $'+ item.rideId +'<br style="color:blue;font-size:12px;font-weight:bold;">'+ itemtext +'</br></p><button class="riderCancel">Cancel my ride</button></div></a></li>';
                             allRideOwnerItems += '<li data-trx="' + item.trxId + '" data-rowid="' + item.rideId + '"data-seats="'+ item.seats +'"><a href="#"><div data-role="controlgroup" data-type="horizontal"><p class="wrap" style="color:black;font-size:12px;font-weight:bold;">' + item.rideFrom +' to '+item.rideTo +' ( Seats:'+ item.rideSeats + ', Booked: '  + item.ridesBooked +' )'  +'<br> Ride id : '+ item.rideId + ' -  '+ moment(item.rideDate).format('llll') +'<br style="color:blue;font-size:12px;font-weight:bold;">'+ itemtext +'</br></p><button class="rideOwnerCancel">Cancel this ride</button></div></a></li>';
+                            actionItems++;
+                            $("#actionitem").text("You have "+actionItems + " action items");
                             }    
                          }
- 
-                     
- 
- 
                  
 
             });
 
-            $("#actionList").append(allRideOwnerItems).listview("refresh").enhanceWithin();
+            //$("#actionList").append(allRideOwnerItems).listview("refresh").enhanceWithin();
+
+            setTimeout(function(){
+                $("#actionList").append(allRideOwnerItems).listview("refresh").enhanceWithin();
+             }, 500);
             var interval = setInterval(function(){
                 $.mobile.loading('hide');
                 clearInterval(interval);
@@ -389,6 +410,8 @@ $.ajax({
                     itemtext = "Trx id : "+ item.trxId + "\n - You Booked  this ride  on "+new Date(item.rideBookedon).toDateString() + " for "+item.seats + " seat/s @ $" + item.ridePrice  +" per seat.";
                     //allItems += '<li data-trx="' + item.trxId + '" data-rowid="' + item.rideId + '"data-seats="'+ item.seats +'"><a href="#"><div data-role="controlgroup" data-type="horizontal"><p class="wrap" style="color:black;font-size:12px;font-weight:bold;">(' + item.rideId + ')'+ item.rideId + '<br> Price: $'+ item.rideId +'<br style="color:blue;font-size:12px;font-weight:bold;">'+ itemtext +'</br></p><button class="riderCancel">Cancel my ride</button></div></a></li>';
                     allriderItems += '<li data-trx="' + item.trxId + '" data-rowid="' + item.rideId + '"data-seats="'+ item.seats +'"><a href="#"><div data-role="controlgroup" data-type="horizontal"><p class="wrap" style="color:black;font-size:12px;font-weight:bold;">' + item.rideFrom +' to '+item.rideTo +' ( Seats:'+ item.rideSeats + ', Booked: '  + item.ridesBooked +' )'  +'<br> Ride id : '+ item.rideId + ' -  '+ moment(item.rideDate).format('llll') +'<br style="color:blue;font-size:12px;font-weight:bold;">'+ itemtext +'</br></p><button class="riderCancel">Cancel my ride</button></div></a></li>';
+                    actionItems++;
+                    $("#actionitem").text("You have "+actionItems + " action items");
                 }
             }
  
@@ -396,7 +419,12 @@ $.ajax({
                 });
             
         
-        $("#actionList").append(allriderItems).listview("refresh").enhanceWithin();
+       // $("#actionList").append(allriderItems).listview("refresh").enhanceWithin();
+
+        setTimeout(function(){
+            $("#actionList").append(allriderItems).listview("refresh").enhanceWithin();
+         }, 500);
+        
         var interval = setInterval(function(){
             $.mobile.loading('hide');
             clearInterval(interval);
@@ -421,7 +449,7 @@ $.ajax({
     }
     
     });//ajax end
-
+    
 //rider list ends
 
 $("#actionList").on("click", ".findbuyerPhone", function(e){
@@ -667,6 +695,7 @@ $("#actionList").on("click", ".findbuyerPhone", function(e){
                         var JSONStringify = JSON.stringify(response);
                         var JSONparse = JSON.parse(JSONStringify);
                         console.log("responce is " + JSONparse.code + " other "+ JSONStringify.code);
+
                         setTimeout(function(){
                         if (response.code == 441) {
                         //alert("delisting 441");
@@ -729,7 +758,229 @@ $("#actionList").on("click", ".findbuyerPhone", function(e){
 
 //ends buycancel
 
+//----- CANCEL SALE starts
+$("#actionList").on("click", ".cancelSale", function(e){
+    e.stopImmediatePropagation();
+//$(document).on("click", ".buyConfirm", function () {
+    //alert("Approve in idForBooklistView")
+    //var clickedId = $(this).attr("id");
+    var cancelSaleId = $(this).parents("li").data('rowid');
+//alert(cancelSaleId);
+    //re-direct to detail page and store to sessionstorage
+    sessionStorage.setItem("sessionstorage_cancelSaleId", cancelSaleId);
+// alert(sessionStorage.getItem("sessionstorage_clickedId"));
 
+navigator.notification.confirm(
+    'Would you like to cancel this sale? If you do, the buyer will be notified about the cancellation and the book will appear for sale again.\n  If you would like to delete this book from your sale list, please delete it after cancelling this sale.', // message
+    onConfirm,            // callback to invoke with index of button pressed
+    'Cancel Sale ',           // title
+    ['Confirm','Cancel']     // buttonLabels
+    );
+    function onConfirm(buttonIndex){
+        if(buttonIndex == 1){
+            var interval = setInterval(function(){
+                $.mobile.loading('show');
+                clearInterval(interval);
+                },1); 
+            $.ajax({
+                type: "POST",
+                url: cancelSale_url,
+                dataType: "json",
+                //timeout: 100000,
+                data: JSON.stringify( { 
+                    "bookId": cancelSaleId,
+                            } ),
+                contentType: "application/json",
+                success: function(response){
+                    console.log("--- cancelSale successful message from saleHistory");
+                    //var JSONResponse = JSON.stringify(response);
+                    //var jsonparse = JSON.parse(JSONResponse);
+                    console.log("json is"+JSON.stringify(response));
+                    var JSONStringify = JSON.stringify(response);
+                 var JSONparse = JSON.parse(JSONStringify);
+                 console.log("responce is " + JSONparse.code + "other "+ JSONStringify.code);
+
+                 setTimeout(function(){
+                    if (response.code == 441) {
+                    //alert("delisting 441");
+                    navigator.notification.alert(
+                        'Sale cancel confirmed',  // message
+                        alertDismissed,         // callback
+                        'Confirmed',            // title
+                        'Done'                  // buttonName
+                    );
+                    //alert(response.success);
+                    };
+
+                    if (response.code == 440) {
+                        //alert("delisting 441");
+                        navigator.notification.alert(
+                            //'Sale cancel confirmed',  // message
+                            response.message,
+                            alertDismissed,         // callback
+                            'Confirmed',            // title
+                            'Done'                  // buttonName
+                        );
+                        //alert(response.success);
+                        //window.location ="saleHistory.html";
+                        };
+                        var interval = setInterval(function(){
+                            $.mobile.loading('hide');
+                            clearInterval(interval);
+                            },1); 
+                            window.location ="landingpage.html";
+                    }, 2000);
+                },
+                error: function(XMLHttpRequest, textStatus, errorThrown) {
+                    //show error message
+                    navigator.notification.alert(
+                        "There was issue in cancelling this sale.",  // message
+                        alertDismissed,         // callback
+                        'Backend Issues',            // title
+                        'Done'                  // buttonName
+                    );
+                    var interval = setInterval(function(){
+                        $.mobile.loading('hide');
+                        clearInterval(interval);
+                        },1); 
+                // alert("There was issue in confirming book receipt.");
+                    //alert("error is"+ errorThrown);
+                    //alert(XMLHttpRequest);
+                }
+                
+                });//ajax end
+            }
+
+
+    }
+});
+
+
+//end CANCEL SALE 
+
+//SALE PRICE CHANGE
+ //class="salePriceChange"
+ $("#actionList").on("click", ".salePriceChange", function(e){
+    e.stopImmediatePropagation();
+    var payAmount;
+    var oldPricefromli = $(this).parents("li").data('price');
+    var newPriceId = $(this).parents("li").data('rowid');
+    sessionStorage.setItem("sessionstorage_newPriceId", newPriceId);
+
+   // alert( " pricelist change");
+    //alert("from li" + oldPricefromli + "id is" + newPriceId);
+
+    function changePrice() {
+        var newPrice;
+        //var payAmount;
+        var newPrice = prompt("Your current price is$ "+ oldPricefromli+".Please enter a new price:");
+        var differenceInPrice = Math.abs(newPrice - oldPricefromli);
+        if (newPrice == null || newPrice == "" || isNaN(newPrice) ) {
+          //alert("The price hasn't been changed");
+          navigator.notification.confirm(
+            'You did not change price or you have not entered number. Please try again', // message
+            alertDismissed,            // callback to invoke with index of button pressed
+            'Change Price',           // title
+            'Done'       // buttonLabels
+        );
+        } else if((oldPricefromli - newPrice ) < 0 ){
+            navigator.notification.confirm(
+                'You can only reduce price. It seems that your revised price is more that earlier quoted price. You will have to delete and re-post if you would like to increase price', // message
+                alertDismissed,            // callback to invoke with index of button pressed
+                'Change Price',           // title
+                'Done'       // buttonLabels
+            ); 
+        }else {
+            payAmount = calculatePayAmount(newPrice);
+            //alert(payAmount);
+            navigator.notification.confirm(
+                'Are you sure you want to change the price of this book? Your current price is ' + oldPricefromli + ' and your new price is ' + newPrice + '. The difference between your new price and your old price is ' + differenceInPrice + ' and accordingly you will receieve payment of $'+ payAmount +'.', // message
+                 onChangePrice,            // callback to invoke with index of button pressed
+                'Change Price',           // title
+                ['Change Price','Do Not Change']     // buttonLabels
+            );
+
+            function onChangePrice(buttonIndex) {
+                if (buttonIndex == 1) {
+                // alert(payAmount); 
+                var interval = setInterval(function(){
+                    $.mobile.loading('show');
+                    clearInterval(interval);
+                    },1);   
+                $.ajax({
+                type: "POST",
+                url: changePrice_url,
+                dataType: "json",
+                //timeout: 100000,
+                data: JSON.stringify( { 
+                    "newPrice": newPrice,
+                    "bookId": newPriceId,
+                    "payAmount":payAmount
+                            } ),
+                contentType: "application/json",
+                success: function(response){
+                    console.log("--- cancelSale successful message from saleHistory");
+                    //var JSONResponse = JSON.stringify(response);
+                    //var jsonparse = JSON.parse(JSONResponse);
+                    if (response.code == 490) {
+                    //alert("delisting 441");
+                    navigator.notification.alert(
+                        'The price of this book has been changed.',  // message
+                        alertDismissed,         // callback
+                        'Price Changed',            // title
+                        'Done'                  // buttonName
+                    );
+                    //alert(response.success);
+                    };
+
+                    if (response.code == 480) {
+                        //alert("delisting 441");
+                        navigator.notification.alert(
+                            //'The price of this book has been changed.',  // message
+                            response.failed,
+                            alertDismissed,         // callback
+                            'Error',            // title
+                            'Done'                  // buttonName
+                        );
+                        //alert(response.success);
+                        };
+                        var interval = setInterval(function(){
+                            $.mobile.loading('hide');
+                            clearInterval(interval);
+                            },1); 
+                    
+                    window.location ="saleHistory.html";
+                },
+                error: function(XMLHttpRequest, textStatus, errorThrown) {
+                    //show error message
+                    navigator.notification.alert(
+                        "There was issue in changing the price.",  // message
+                        alertDismissed,         // callback
+                        'Backend Issues',            // title
+                        'Done'                  // buttonName
+                    );
+                    var interval = setInterval(function(){
+                        $.mobile.loading('hide');
+                        clearInterval(interval);
+                        },1); 
+                }
+                
+                });
+            }else if (buttonIndex == 2) {
+                ;
+            }
+            };
+        }
+  
+      }
+
+      changePrice();
+ });
+
+ //END SALE PRICE CHANGE
+
+ //alert($("#actionList").children().length);
+ //alert(actionItems);
 
 } // starup function ends
 

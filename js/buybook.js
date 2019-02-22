@@ -13,9 +13,8 @@ var trxCommissionLowerLimit;
 var trxCommissionHigherLimit; 
 var trxLimit;
 
-$(".loader").fadeOut(1300);
-$(".ajaxloader").fadeOut(1600);
-//$(".myloader").fadeOut(100);
+//$(".loader").fadeOut(1300);
+
 
     $('.ui-icon-carat-l').css("background-color", "#333333");
    $('.ui-icon-power').css("background-color", "#333333");
@@ -29,18 +28,12 @@ $(document).bind('mobileinit', function () {
     $.mobile.loader.prototype.options.textonly = ""; 
 }); 
 console.log("entering buybook now");
-/*
-var interval = setInterval(function(){
-    $.mobile.loading('show',{
-        text: 'foo',
-        textVisible: true,
-        theme: 'z',
-        html: "<span class='ui-bar ui-overlay-c ui-corner-all'><img src='./css/5.gif' /><h2>.. Page is loading</h2></span>"
-      });
 
+var interval = setInterval(function(){
+    $.mobile.loading('show');
     clearInterval(interval);
-    },1); 
-*/
+    },1);  
+
 $(document).ajaxStop(function() {
    // $("#ajax_loader").hide();
     //alert("end");

@@ -106,6 +106,10 @@ var riderCancel_url = urlrideshare_name +'riderCancel';
 var rideOwnerCancel_url = urlrideshare_name +'rideOwnerCancel';
 var pushmessageforRider_url = urlrideshare_name +'pushmessageforRider';
 
+//landingpage
+
+var populaterideownerHistory_url = urlrideshare_name +'populaterideownerHistory';
+
 
 //privacy polict / TOS
 var url_privacy_policy = 'https://quizeek.wordpress.com/privacy-policy/';
